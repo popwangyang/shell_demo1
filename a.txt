@@ -1,0 +1,5 @@
+Text through stdin
+1
+2
+3
+
