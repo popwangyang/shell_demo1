@@ -45,3 +45,21 @@ else
   echo "超级用户运行"
 fi
 
+prepend() {
+  [ -d "$2" ] && eval $1=\"$2':'\$$1\" && export $1;
+}
+
+#讲解 【 -d "$2" 】检测函数第二个参数指定的目录是否存在， eval命令将$2添加到$1中，以:分隔开，如果$1为空，会在结尾处留下一个“:”
+#改良版本的：
+
+prependPro() {
+  [ -d "$2" ] && eval $1=\"$2\$\{$1:+':'\$$1\}\" && export $1;
+}
+
+#eg: ${parameter:+expression}如果parameter不为空，则使用expression。
+
+a="88"
+b="kkkk"
+c="${a:+$b}828828"  # 正确写法，去掉内部的引号
+echo "$c"
+
